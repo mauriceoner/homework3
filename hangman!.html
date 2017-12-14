@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+
+
+<div id="blanks"></div>
+<div id="guessesRemaining"></div>
+<div id="wins"></div>
+<div id="losses"></div>
+<div id="lettersPressed"></div>
+
+
+
+
+
+
+<script type="text/javascript">
+var arrayOfWords = ["spian", "france", "albania", "austria", "azerbaijan", "denmark", "finland", "germany", "greece", "italy", "netherlands", "norway", "sweeden", "switzerland", "portugal"];
+    var pickedWord;
+    var pickedWordArray = [];
+    var pickedWordPlaceholders = [];
+    var wins = 0;
+    var losses = 0;
+    var lettersGuessed;
+    var guessesLeft;
+
+    function newGame() {
+      guessesLeft = 10;
+      lettersGuessed = [];
+      pickedWord = arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)];
+      pickedWordArray = pickedWord.split("");
+      pickedWordPlaceholders = [];
+
+
+      for (var i = 0; i < pickedWordArray.length; i++) {
+        pickedWordPlaceholders.push("_");
+
+	var placeHolderString = pickedWordPlaceholders.join(' ');
+	document.querySelector("#guessesRemaining").innerHTML ="Lives: " + guessesLeft;
+	document.querySelector("#blanks").innerHTML = placeHolderString;
+	document.querySelector("#wins").innerHTML = "Wins: " + wins;
+	document.querySelector("#losses").innerHTML = "Losses: " + losses;
+
+	}	
+		}
+
+		document.onkeyup = function(event) {
+					var userGuess = event.key;
+          for(var i = 0; i <= lettersGuessed.length-1; i++)
+					{
+    				if(lettersGuessed[i].indexOf(userGuess) != -1)
+    				{
+        			return false;
+    				}
+					}
+         console.log(userGuess);
+       
+					lettersGuessed.push(userGuess);
+            console.log(lettersGuessed);
+					
+				for (var i = 0; i < pickedWordArray.length; i++) {
+					if (userGuess === pickedWordArray[i]) {
+						pickedWordPlaceholders[i] = userGuess;
+					}
+				}
+						document.querySelector("#blanks").innerHTML = pickedWordPlaceholders.join(" ");			
+						document.querySelector("#lettersPressed").innerHTML = lettersGuessed;
+					
+					if (pickedWordPlaceholders.indexOf(userGuess) === -1) {
+	          			--guessesLeft;
+	          			
+	          		}		
+	          			document.querySelector("#guessesRemaining").innerHTML ="Lives: " + guessesLeft;
+
+	          		if (guessesLeft === 0){
+	          			losses++;
+                  
+	          			alert("You lose!");
+	          			newGame();
+	          		}	
+	          			document.querySelector("#losses").innerHTML = "Losses: " + losses;
+       	
+	          		if (pickedWordPlaceholders.join("") === pickedWord){
+	          			wins++;
+	          		alert("You win!");
+	          			newGame();
+	          		}
+	          			document.querySelector("#wins").innerHTML = "Wins: " + wins;	          		
+		}
+
+
+newGame();
+</script>
+            

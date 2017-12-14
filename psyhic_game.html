@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Psyhic Game</title>
+</head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  
+
+  	<h1>PsychicGame</h1>
+
+  	<h2>Guess what letter im thinking of</h2>
+
+  	keyPressed: <span id="kp"></span>
+<div>
+  	wins: <span id="winTotal"></span>
+</div>
+<div>
+  	losses: <span id="lossTotal"></span>
+</div>
+<div>
+  	guesses_left: <span id="guesses"></span>
+</div>
+  	<p id="show"></p>
+
+
+
+
+
+
+
+
+
+
+
+  	<script type="text/javascript">
+
+  /*var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];*/
+
+  
+  var comp_guess;
+
+  var text = ""
+  var i;
+  var wins=0;
+  var losses=0;
+  var guesses_left=10;
+
+
+  // for (i=0; i<10; i++) {
+  // 	text += (i);
+  // }
+
+  
+/*----------------------------*/
+  function comp_rand() {
+  text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for (var i = 0; i < 1; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+
+  
+}
+console.log(comp_rand());
+
+/*----------------------------*/
+
+/*document.getElementById("show").innerHTML=text;*/
+
+/*----------------------------*/
+
+document.querySelector('html').onkeydown = function guess(event) {
+    var key_pressed=String.fromCharCode(event.keyCode);
+    document.getElementById("kp").innerHTML=key_pressed;
+
+  if (key_pressed==text)
+    /*if (key_pressed=="Q")*/
+     {
+	wins++;
+	document.getElementById("winTotal").innerHTML=wins;
+	alert("you matched, you win");
+       //function comp_rand() {
+			//text = "";
+			//var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			//for (var i = 0; i < 1; i++)
+			//text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+			return text;
+      comp_rand();
+
+
+			
+
+	}
+	else /*if(key_pressed=="A")*/
+	{
+	
+	/*guesses_left--;
+	document.getElementById("guesses").innerHTML=guesses left;
+	*/
+	
+	losses++;
+	document.getElementById("lossTotal").innerHTML=losses;
+	/*alert("youve pressed a, you lose");*/
+
+	}
+
+  if (losses=="10"){
+  return comp_rand();
+}
+}
+
+
+
+
+
+
+</script>
